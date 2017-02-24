@@ -18,3 +18,9 @@
 - [ ] Calories/energy used
 - [ ] Distances in terms of Earth Radii and AU
 - [ ] Time coverted to local time based on GPS position
+
+## Useful links
+
+http://nbviewer.jupyter.org/github/titsworth/hsvpy-runtalk/tree/master/
+
+https://ocefpaf.github.io/python4oceanographers/blog/2014/08/18/gpx/
