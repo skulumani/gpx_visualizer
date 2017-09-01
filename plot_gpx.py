@@ -2,10 +2,12 @@ from os import listdir
 from os.path import isfile, join
 import matplotlib.pyplot as plt
 import gpxpy
+import pdb
 
 def plot_ride(filename):
     gpx_file = open(filename, 'r')
     gpx = gpxpy.parse(gpx_file)
+    pdb.set_trace()
 
     lat = []
     lon = []
@@ -56,3 +58,5 @@ def plot_many_rides(data_path):
 
     filename = data_path + '.png'
     plt.savefig(filename, facecolor = fig.get_facecolor(), bbox_inches='tight', pad_inches=0, dpi=300)
+
+plot_ride('Morning_Ride.gpx')
