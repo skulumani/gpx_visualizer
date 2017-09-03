@@ -24,8 +24,8 @@
 	function initMap() {
 		// Styles a map in night mode.
 		var map = new google.maps.Map(document.getElementById('map'), {
-			center: {lat:38.91913, lng: -77.08237},
-			zoom: 11,
+			center: {lat:38.919132, lng: -77.082371},
+			zoom: 12,
 			styles: [
 				{
 					"elementType": "geometry",
@@ -286,9 +286,7 @@
 		});
 
 		var PolylineCoordinates = [
-			new google.maps.LatLng(38.926, -77.056689),
-			new google.maps.LatLng(38.925463, -77.05669),
-			new google.maps.LatLng(38.925467, -77.056686),
+			
 		];
 
 		var Path = new google.maps.Polyline({
