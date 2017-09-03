@@ -2,10 +2,15 @@ from os import listdir
 from os.path import isfile, join
 import matplotlib.pyplot as plt
 import gpxpy
+import pdb
+import gmplot
+import numpy as np
+import webbrowser           # open html file
 
 def plot_ride(filename):
     gpx_file = open(filename, 'r')
     gpx = gpxpy.parse(gpx_file)
+    # pdb.set_trace()
 
     lat = []
     lon = []
@@ -18,14 +23,18 @@ def plot_ride(filename):
                 lon.append(point.longitude)
                 ele.append(point.elevation)
 
-    fig = plt.figure(facecolor = '0.05')
-    ax = plt.Axes(fig, [0., 0., 1., 1.], )
-    ax.set_aspect('equal')
-    ax.set_axis_off()
-    fig.add_axes(ax)
-    plt.plot(lon, lat, color = 'deepskyblue', lw = 0.2, alpha = 0.8)
-
+    # fig = plt.figure(facecolor = '0.05')
+    # ax = plt.Axes(fig, [0., 0., 1., 1.], )
+    # ax.set_aspect('equal')
+    # ax.set_axis_off()
+    # fig.add_axes(ax)
+    # plt.plot(lon, lat, color = 'deepskyblue', lw = 0.2, alpha = 0.8)
+    #
+    gmap = gmplot.GoogleMapPlotter( np.mean(lat), np.mean(lon), 12)
+    gmap.plot(lat, lon,  'red', size=2, marker=False, alpha=1)
+    gmap.draw('map.html')
     plt.show()
+    webbrowser.open('map.html')
 
 def plot_many_rides(data_path):
     # data_path = 'lpq'
@@ -56,3 +65,5 @@ def plot_many_rides(data_path):
 
     filename = data_path + '.png'
     plt.savefig(filename, facecolor = fig.get_facecolor(), bbox_inches='tight', pad_inches=0, dpi=300)
+
+plot_ride('Morning_Ride.gpx')
