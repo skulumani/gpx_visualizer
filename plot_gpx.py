@@ -31,7 +31,7 @@ def plot_ride(filename):
     # plt.plot(lon, lat, color = 'deepskyblue', lw = 0.2, alpha = 0.8)
     #
     gmap = gmplot.GoogleMapPlotter( np.mean(lat), np.mean(lon), 12)
-    gmap.plot(lat, lon,  'red', size=2, marker=False, alpha=1)
+    gmap.plot(lat, lon,  color='deepskyblue', lw=0.2, alpha=0.8)
     gmap.draw('map.html')
     plt.show()
     webbrowser.open('map.html')
