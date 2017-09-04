@@ -97,4 +97,5 @@ def plot_many_rides(data_path):
     plt.savefig(filename, facecolor = fig.get_facecolor(), bbox_inches='tight', pad_inches=0, dpi=300)
 
 
-plot_ride('Morning_Ride.gpx')
+# plot_ride('Morning_Ride.gpx')
+plot_many_rides('./gpx_files')
