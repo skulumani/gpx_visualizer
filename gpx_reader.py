@@ -110,10 +110,14 @@ def pandas_data_frame_for_gpx(gpx):
     d_frame.index.name = 'name'
     return d_frame
 
-# Parse an existing file 
+# Parse an existing file
 filename = 'Morning_Ride.gpx'
 gpx_file = open(filename, 'r')
 gpx = gpxpy.parse(gpx_file)
+dt = gpx.time
+time_stamp = int('{:{dfmt}{tfmt}}'.format(dt, dfmt='%Y%m%d', tfmt='%H%M'))
+print(time_stamp)
+pdb.set_trace()
 
 print_gpx_info(gpx,filename)
 # print some info about the gpx file
