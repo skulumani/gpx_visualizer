@@ -286,7 +286,7 @@
 		});
 
 		var PolylineCoordinates = [
-			
+
 		];
 
 		var Path = new google.maps.Polyline({
@@ -294,8 +294,8 @@
 			geodesic: true,
 			path: PolylineCoordinates,
 			strokeColor: "#FFFFFF",
-			strokeOpacity: 0.800000,
-			strokeWeight: 1
+			strokeOpacity: 0.300000,
+			strokeWeight: 0.7
 		});
 
 
