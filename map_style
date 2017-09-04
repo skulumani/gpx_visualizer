@@ -285,21 +285,7 @@
 			]
 		});
 
-		var PolylineCoordinates = [
 
-		];
-
-		var Path = new google.maps.Polyline({
-			clickable: false,
-			geodesic: true,
-			path: PolylineCoordinates,
-			strokeColor: "#FFFFFF",
-			strokeOpacity: 0.300000,
-			strokeWeight: 0.7
-		});
-
-
-		Path.setMap(map)
 	}
 	</script>
 	<script src="https://maps.googleapis.com/maps/api/js?callback=initMap"

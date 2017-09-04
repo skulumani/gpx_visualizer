@@ -20,17 +20,33 @@ def map_generator(lat_array, lon_array, center_lat, center_lon, zoom):
     # lon_array = [-77.056689, -77.05669, -77.056686]
 
     map_html = open('map.html', 'w')
+    activity_number = len(lat_array)
 
     for i, line in enumerate(style_lines):
         if i==26:
             line = '\t\t\tcenter: {{lat:{}, lng: {}}},\n'.format(center_lat, center_lon)
         elif i==27:
             line = '\t\t\tzoom: {},\n'.format(zoom)
-        elif i==288:
-            for lat, lon in zip(lat_array, lon_array):
-                line = '\t\t\tnew google.maps.LatLng({}, {}),\n'.format(lat, lon)
-                map_html.write(line)
-            line = ''
+        elif i==287:
+            for j in range(activity_number):
+                map_html.write('\t\tvar PolylineCoordinates{:d} = [\n'.format(j))
+                for lat, lon in zip(lat_array[j], lon_array[j]):
+                    line = '\t\t\tnew google.maps.LatLng({}, {}),\n'.format(lat, lon)
+                    map_html.write(line)
+                map_html.write('\t\t];\n')
+                map_html.write('\n')
+                map_html.write('\t\tvar Path{:d} = new google.maps.Polyline({{\n'.format(j))
+                map_html.write('\t\t\tclickable: false,\n')
+                map_html.write('\t\t\tgeodesic: true,\n')
+                map_html.write('\t\t\tpath: PolylineCoordinates{:d},\n'.format(j))
+                map_html.write('\t\t\tstrokeColor: "#FFFFFF",\n')
+                map_html.write('\t\t\tstrokeOpacity: 0.300000,\n')
+                map_html.write('\t\t\tstrokeWeight: 1.5\n')
+                map_html.write('\t\t});\n')
+                map_html.write('\n')
+                map_html.write('\t\tPath{:d}.setMap(map)\n'.format(j))
+                map_html.write('\n')
+                line = ''
 
         map_html.write(line)
 
@@ -92,6 +108,7 @@ def plot_many_rides(data_path):
                 for point in segment.points:
                     lat.append(point.latitude)
                     lon.append(point.longitude)
+
         plt.plot(lon, lat, color = 'deepskyblue', lw = 0.2, alpha = 0.8)
 
         lat_array.append(lat)
@@ -99,6 +116,9 @@ def plot_many_rides(data_path):
 
         lat = []
         lon = []
+
+    map_generator(lat_array, lon_array, np.mean(lat_array[0]), np.mean(lon_array[0]), 14)
+    webbrowser.open('map.html')
 
     filename = data_path + '.png'
     plt.savefig(filename, facecolor = fig.get_facecolor(), bbox_inches='tight', pad_inches=0, dpi=300)
