@@ -73,6 +73,9 @@ def plot_many_rides(data_path):
     lat = []
     lon = []
 
+    lat_array = []
+    lon_array = []
+
     fig = plt.figure(facecolor = '0.05')
     ax = plt.Axes(fig, [0., 0., 1., 1.], )
     ax.set_aspect('equal')
@@ -90,6 +93,10 @@ def plot_many_rides(data_path):
                     lat.append(point.latitude)
                     lon.append(point.longitude)
         plt.plot(lon, lat, color = 'deepskyblue', lw = 0.2, alpha = 0.8)
+
+        lat_array.append(lat)
+        lon_array.append(lon)
+
         lat = []
         lon = []
 
