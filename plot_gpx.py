@@ -7,6 +7,35 @@ import gmplot
 import numpy as np
 import webbrowser           # open html file
 
+def map_generator(lat_array, lon_array, center_lat, center_lon, zoom):
+
+    with open('map_style') as f:
+        style_lines = f.readlines()
+
+    # center_lat = 38.919130
+    # center_lon = -77.082370
+    # zoom = 11
+    # lat_array = [38.926, 38.925463, 38.925467]
+    # lon_array = [-77.056689, -77.05669, -77.056686]
+
+    map_html = open('map.html', 'w')
+
+    for i, line in enumerate(style_lines):
+        if i==26:
+            line = '\t\t\tcenter: {{lat:{}, lng: {}}},\n'.format(center_lat, center_lon)
+        elif i==27:
+            line = '\t\t\tzoom: {},\n'.format(zoom)
+        elif i==288:
+            for lat, lon in zip(lat_array, lon_array):
+                line = '\t\t\tnew google.maps.LatLng({}, {}),\n'.format(lat, lon)
+                map_html.write(line)
+            line = ''
+
+        map_html.write(line)
+
+    map_html.close()
+
+
 def plot_ride(filename):
     gpx_file = open(filename, 'r')
     gpx = gpxpy.parse(gpx_file)
@@ -29,12 +58,12 @@ def plot_ride(filename):
     # ax.set_axis_off()
     # fig.add_axes(ax)
     # plt.plot(lon, lat, color = 'deepskyblue', lw = 0.2, alpha = 0.8)
-    #
-    gmap = gmplot.GoogleMapPlotter( np.mean(lat), np.mean(lon), 12)
-    gmap.plot(lat, lon,  color='deepskyblue', lw=0.2, alpha=0.8)
-    gmap.draw('map.html')
-    plt.show()
+
+    map_generator(lat, lon, np.mean(lat),  np.mean(lon), 13)
     webbrowser.open('map.html')
+
+    plt.show()
+
 
 def plot_many_rides(data_path):
     # data_path = 'lpq'
