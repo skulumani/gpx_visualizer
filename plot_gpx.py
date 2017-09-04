@@ -1,11 +1,12 @@
+import gpxpy
+import matplotlib.pyplot as plt
+import numpy as np
+import pdb
+import webbrowser           # open html file
+
 from os import listdir
 from os.path import isfile, join
-import matplotlib.pyplot as plt
-import gpxpy
-import pdb
-import gmplot
-import numpy as np
-import webbrowser           # open html file
+
 
 def map_generator(lat_array, lon_array, center_lat, center_lon, zoom):
 
@@ -94,5 +95,6 @@ def plot_many_rides(data_path):
 
     filename = data_path + '.png'
     plt.savefig(filename, facecolor = fig.get_facecolor(), bbox_inches='tight', pad_inches=0, dpi=300)
+
 
 plot_ride('Morning_Ride.gpx')
